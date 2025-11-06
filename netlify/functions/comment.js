@@ -6,18 +6,13 @@ const serverless = require('serverless-http');
 const app = Waline({
   env: 'netlify',
 
-  // 保存前去除隐私信息
-  async preSave(comment) {
-    try {
-      comment.ip = '';
-      comment.location = '';
-      comment.ua = '';
-      return comment;
-    } catch (e) {
-      console.error('preSave error:', e);
-      return comment;
-    }
-  },
+async preSave(comment) {
+  comment.ip = '';
+  comment.location = '';
+  comment.ua = '';
+  return comment; // 必须返回
+}
+,
 });
 
 module.exports.handler = serverless(http.createServer(app));
