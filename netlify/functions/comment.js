@@ -6,7 +6,6 @@ const app = Waline({
   env: 'netlify',
 
   async preSave(comment) {
-    // 删除 IP、地理位置、UA
     comment.ip = '';
     comment.location = '';
     comment.ua = '';
