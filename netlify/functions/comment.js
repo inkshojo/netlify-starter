@@ -4,12 +4,15 @@ const serverless = require('serverless-http');
 
 const app = Waline({
   env: 'netlify',
-  async postSave(comment) {
-    // do what ever you want after save comment
+
+  preSave(comment) {
     comment.ip = '';
     comment.location = '';
     comment.ua = '';
-    return comment;
+    return Promise.resolve(comment);
+  },
+
+  async postSave(comment) {
   },
 });
 
